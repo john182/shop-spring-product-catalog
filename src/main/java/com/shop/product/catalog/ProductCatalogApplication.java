@@ -1,4 +1,4 @@
-package product_catalog;
+package com.shop.product.catalog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
