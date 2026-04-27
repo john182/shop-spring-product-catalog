@@ -1,12 +1,14 @@
 package com.shop.product.catalog.presentation;
 
+import com.shop.product.catalog.infrastructure.security.SecurityAnnotations.CanReadProducts;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
+
+import static com.shop.product.catalog.infrastructure.security.SecurityAnnotations.CanWriteProducts;
 
 @RestController
 @RequestMapping("/api/v1/test-security")
@@ -14,7 +16,7 @@ public class TestSecurityController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAuthority('SCOPE_products:write')")
+    @CanWriteProducts
     public ProductDetailOutput create(@RequestBody ProductInput input) {
         return ProductDetailOutput.builder()
                 .id(UUID.randomUUID())
@@ -38,7 +40,7 @@ public class TestSecurityController {
     }
 
     @GetMapping("/{productId}")
-    @PreAuthorize("hasAuthority('SCOPE_products:read')")
+    @CanReadProducts
     public ProductDetailOutput findById(@PathVariable UUID productId) {
         return ProductDetailOutput.builder()
                 .id(productId)
