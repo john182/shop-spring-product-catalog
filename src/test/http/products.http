@@ -1,0 +1,30 @@
+### Variáveis — edite aqui antes de executar
+
+@host = http://127.0.0.1:8080
+@token = Bearer eyJraWQiOiJkOWJlODA1MC00Nzc4LTQxMmEtYTNiNy1hMjE3NDBiNTNmNjgiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzaG9wLXRlc3QiLCJhdWQiOiJzaG9wLXRlc3QiLCJuYmYiOjE3NzczMjY1NTUsInNjb3BlIjpbInByb2R1Y3RzOnJlYWQiLCJwcm9kdWN0czp3cml0ZSJdLCJpc3MiOiJodHRwOi8vc2hvcC1hdXRob3JpemF0aW9uLXNlcnZlcjo4MDgxIiwiZXhwIjoxNzc3MzI3NDU1LCJpYXQiOjE3NzczMjY1NTUsImp0aSI6ImFjZWMyN2M2LTdkNTEtNDNiYi05OTdmLTIyNDE0YWM1M2E1NCJ9.SGRkSIVTfoJfHMkpx8Ms5uo4LwWuIV10qq6madIKtAhPAhMzPXgOXaCxBO0b7SWLcoaRiIOQWrK4vClI1pLMc5lBZMdgsbv35U6MrsMIfLg08_vnrBV5dJGSv--6ktjlAdWUQWE-wmDFuMBxnzpUnHEOnvhwC6ktI1-dzTh4Y5jUMSdg0h_InzXvxeV35O1v7oXOv4p44n_yk06VM85qgraaSJBtNdjPKByW8RWhk_FDgLq-0j9dC178Rj5MtEVvECXbMo3mFRYyKAznWBXKoBWzEcfuue0whL1InMps9Dvso1BUI0_2MyFVxfpOIKqhEcK4TVyzmvq1cpJaepVIRg
+@productId = 00000000-0000-0000-0000-000000000001
+
+###
+# --- POST /api/v1/test-security (requer products:write) ---
+### Create Product
+POST {{host}}/api/v1/products
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Notebook X11",
+  "brand": "Deep Diver",
+  "description": "A Gamer Notebook",
+  "regularPrice": 1500.00,
+  "salePrice": 1000.00,
+  "enabled": true,
+  "categoryId": "00000000-0000-0000-0000-000000000001"
+}
+
+###
+# --- GET /api/v1/test-security/{productId} (requer products:read) ---
+### Find Product By Id
+GET {{host}}/api/v1/products/{{productId}}
+Accept: application/json
+Authorization: {{token}}
+

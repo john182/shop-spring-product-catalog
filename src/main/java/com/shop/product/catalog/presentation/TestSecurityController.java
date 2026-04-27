@@ -1,6 +1,5 @@
 package com.shop.product.catalog.presentation;
 
-import jakarta.annotation.security.PermitAll;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +9,12 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/products")
-public class ProductController {
+@RequestMapping("/api/v1/test-security")
+public class TestSecurityController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasAuthority('SCOPE_products:write')")
     public ProductDetailOutput create(@RequestBody ProductInput input) {
         return ProductDetailOutput.builder()
                 .id(UUID.randomUUID())
@@ -39,6 +38,7 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
+    @PreAuthorize("hasAuthority('SCOPE_products:read')")
     public ProductDetailOutput findById(@PathVariable UUID productId) {
         return ProductDetailOutput.builder()
                 .id(productId)
@@ -56,5 +56,4 @@ public class ProductController {
                         .build())
                 .build();
     }
-
 }
