@@ -1,6 +1,7 @@
 package com.shop.product.catalog.presentation;
 
 
+import com.shop.product.catalog.application.product.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -44,6 +45,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         problemDetail.setProperty("fields", fieldErrors);
 
         return super.handleExceptionInternal(ex, problemDetail, headers, status, request);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ProblemDetail handleResourceNotFoundException(ResourceNotFoundException exception) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problemDetail.setTitle("Not found");
+        problemDetail.setDetail(exception.getMessage());
+        problemDetail.setType(URI.create("/errors/not-found"));
+        return problemDetail;
     }
 
 }
