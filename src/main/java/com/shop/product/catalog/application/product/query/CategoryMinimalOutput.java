@@ -1,4 +1,4 @@
-package com.shop.product.catalog.presentation;
+package com.shop.product.catalog.application.product.query;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

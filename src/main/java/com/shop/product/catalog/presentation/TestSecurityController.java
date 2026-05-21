@@ -1,5 +1,8 @@
 package com.shop.product.catalog.presentation;
 
+import com.shop.product.catalog.application.product.management.ProductInput;
+import com.shop.product.catalog.application.product.query.CategoryMinimalOutput;
+import com.shop.product.catalog.application.product.query.ProductDetailOutput;
 import com.shop.product.catalog.infrastructure.security.SecurityAnnotations.CanReadProducts;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
